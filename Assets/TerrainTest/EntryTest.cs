@@ -10,7 +10,7 @@ public class EntryTest : MonoBehaviour
     public ScrollRect scrollRect;
     public GameObject buttonPrefab; // 预制的按钮
     
-    public List<int> sceneIndexList = new List<int>();
+    public Dictionary<int, string> sceneIndexList = new Dictionary<int, string>();
 
     private void Start()
     {
@@ -20,14 +20,24 @@ public class EntryTest : MonoBehaviour
             Debug.LogError("ScrollRect or ButtonPrefab is not assigned.");
             return;
         }
-        
-        for (int i = 0; i <sceneIndexList.Count; i++)
+
+        sceneIndexList = new Dictionary<int, string>()
         {
-            CreateButton(sceneIndexList[i]);
+            {1, "MeshRender"},
+            {2, "MeshRender+DynamicBatch"},
+            {3, "MeshRender+GPUInstance"},
+            {4, "MeshRender+SRPBatch"},
+            {5, "SpriteRender+DynamicBatch"},
+            {6, "SpriteRender+GPUInstance"}
+        };
+
+        foreach (var (sceneIndex, sceneName) in sceneIndexList)
+        {
+            CreateButton(sceneName, sceneIndex);
         }
     }
 
-    void CreateButton(int sceneIndex)
+    void CreateButton(string sceneName, int sceneIndex)
     {
         // 实例化按钮预制体
         Button newButton = Instantiate(buttonPrefab).GetComponent<Button>();
@@ -36,10 +46,10 @@ public class EntryTest : MonoBehaviour
         newButton.transform.SetParent(scrollRect.content, false);
 
         // 设置按钮的文本
-        TextMeshPro buttonTextComponent = newButton.GetComponentInChildren<TextMeshPro>();
+        TextMeshProUGUI buttonTextComponent = newButton.GetComponentInChildren<TextMeshProUGUI>();
         if (buttonTextComponent != null)
         {
-            buttonTextComponent.text = $"{sceneIndex}";
+            buttonTextComponent.text = sceneName;
         }
 
         // 添加按钮点击事件
