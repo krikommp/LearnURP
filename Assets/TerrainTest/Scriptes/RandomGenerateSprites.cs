@@ -12,6 +12,12 @@ public class RandomGenerateSprites : MonoBehaviour
     [SerializeField] private bool useSpriteAtlas = true;
     [SerializeField] private Material spriteMaterial;
     
+    private void Start()
+    {
+        Clear();
+        Generate();
+    }
+    
     public void Clear()
     {
         for (int i = root.childCount - 1; i >= 0; i--)
