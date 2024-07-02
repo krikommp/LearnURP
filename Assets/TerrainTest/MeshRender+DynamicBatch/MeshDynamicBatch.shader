@@ -3,6 +3,8 @@ Shader "Unlit/MeshDynamicBatch"
     Properties
     {
         _Textures("Textures", 2DArray) = "" {}
+        _MainTex2 ("Sprite Texture2", 2D) = "white" {}
+        _MainTex3 ("Sprite Texture3", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
@@ -98,7 +100,11 @@ Shader "Unlit/MeshDynamicBatch"
 
             Texture2DArray _Textures;
             SamplerState sampler_Textures;
-
+            Texture2D _MainTex2;
+            SamplerState sampler_MainTex2;
+            Texture2D _MainTex3;
+            SamplerState sampler_MainTex3;
+            
             float _TextureId;
             half4 _RendererColor;
             half2 _Flip;
@@ -139,6 +145,10 @@ Shader "Unlit/MeshDynamicBatch"
                 // Now we sample texture from Texture2DArray
                 half4 c = _Textures.Sample(sampler_Textures,
                                            float3(IN.texcoord, IN.color.r * 5));
+                half4 c2 = SAMPLE_TEXTURE2D(_MainTex2, sampler_MainTex2, IN.texcoord);
+                half4 c3 = SAMPLE_TEXTURE2D(_MainTex3, sampler_MainTex3, IN.texcoord);
+                half r = c.r * c2.r *c3.r;
+                c.r = r;
                 
                 return c;
 
