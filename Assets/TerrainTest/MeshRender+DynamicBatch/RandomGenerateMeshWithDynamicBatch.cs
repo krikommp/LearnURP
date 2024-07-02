@@ -10,6 +10,7 @@ public class RandomGenerateMeshWithDynamicBatch : MonoBehaviour
 {
     [SerializeField] private List<Terrain> terrains = new List<Terrain>();
     [SerializeField] private List<Texture2D> textures = new List<Texture2D>();
+    [SerializeField] private TextureAtlasData textureAtlasData;
     [SerializeField] private int numToGenerate = 1;
     [SerializeField] private Transform root;
     [SerializeField] private Material instancedMaterial;
