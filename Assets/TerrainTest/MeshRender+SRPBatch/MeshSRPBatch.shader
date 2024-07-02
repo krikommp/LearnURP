@@ -3,6 +3,8 @@ Shader "Unlit/MeshSRPBatch"
     Properties
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
+        _MainTex2 ("Sprite Texture2", 2D) = "white" {}
+        _MainTex3 ("Sprite Texture3", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
@@ -34,6 +36,10 @@ Shader "Unlit/MeshSRPBatch"
 
             Texture2D _MainTex;
             SamplerState sampler_MainTex;
+            Texture2D _MainTex2;
+            SamplerState sampler_MainTex2;
+            Texture2D _MainTex3;
+            SamplerState sampler_MainTex3;
             
 
             struct appdata_t
@@ -64,6 +70,10 @@ Shader "Unlit/MeshSRPBatch"
               half4 SpriteFrag(v2f IN) : SV_Target
             {
                 half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
+                half4 c2 = SAMPLE_TEXTURE2D(_MainTex2, sampler_MainTex2, IN.texcoord);
+                half4 c3 = SAMPLE_TEXTURE2D(_MainTex3, sampler_MainTex3, IN.texcoord);
+                half r = c.r * c2.r *c3.r;
+                c.r = r;
                 return c;
             }
             

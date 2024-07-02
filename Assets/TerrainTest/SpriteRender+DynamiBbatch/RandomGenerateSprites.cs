@@ -80,8 +80,8 @@ public class RandomGenerateSprites : MonoBehaviour
 
             // Set the position of the new object
             newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-            newObject.transform.position = randomPosition;
-            newObject.transform.SetParent(root, false);
+            newObject.transform.localPosition = randomPosition;
+            newObject.transform.SetParent(root, true);
  
             Debug.Log($"Generated object placed on terrain at {randomPosition}");
         }

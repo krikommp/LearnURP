@@ -114,6 +114,12 @@ Shader "Unlit/Sprite"
             {
                 fixed4 c = tex2D(_MainTex, i.uv);
                 c.rgb *= c.a;
+                fixed4 c2 = tex2D(_ColorMap, i.uv);
+                fixed4 c3 = tex2D(_ColorMap2, i.uv);
+
+                half r = c.r * c2.r *c3.r;
+                c.r = r;
+                
                 return c;
             }
             ENDCG

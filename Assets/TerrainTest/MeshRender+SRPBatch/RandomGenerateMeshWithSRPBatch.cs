@@ -10,6 +10,8 @@ public class RandomGenerateMeshWithSRPBatch : MonoBehaviour
     [SerializeField] private Transform root;
     [SerializeField] private Material instancedMaterial;
     [SerializeField] private Mesh quadMesh;
+    [SerializeField] private Texture2D texture2;
+    [SerializeField] private Texture2D texture3;
     
     public void Clear()
     {
@@ -59,16 +61,20 @@ public class RandomGenerateMeshWithSRPBatch : MonoBehaviour
 
             GameObject newObject = new GameObject("GeneratedMeshObject");
             newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-            newObject.transform.position = randomPosition;
+            newObject.transform.localPosition = randomPosition;
             newObject.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-            newObject.transform.SetParent(root, false);
+            newObject.transform.SetParent(root, true);
 
             MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
             MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
             meshRenderer.enabled = true;
             meshRenderer.material = instancedMaterial;
-            
-            meshRenderer.material.SetTexture("_MainTex", textures[randomSpriteCount]);
+
+            var material = new Material(instancedMaterial);
+            material.SetTexture("_MainTex", textures[randomSpriteCount]);
+            material.SetTexture("_MainTex2", texture2);
+            material.SetTexture("_MainTex3", texture3);
+            meshRenderer.material = material;
             meshFilter.mesh = quadMesh;
         }
     }

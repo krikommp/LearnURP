@@ -16,7 +16,9 @@ public class RandomGenerateMeshWithGpuInstance : MonoBehaviour
     [SerializeField] private Transform root;
     [SerializeField] private Material instancedMaterial;
     [SerializeField] private Mesh quadMesh;
-
+    [SerializeField] private Texture2D texture2;
+    [SerializeField] private Texture2D texture3;
+    
     private Texture2DArray spriteTextures;
     private MaterialPropertyBlock props;
     private int textureId = 0;
@@ -84,8 +86,8 @@ public class RandomGenerateMeshWithGpuInstance : MonoBehaviour
 
             GameObject newObject = new GameObject("GeneratedMeshObject");
             newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-            newObject.transform.position = randomPosition;
-            newObject.transform.SetParent(root, false);
+            newObject.transform.localPosition = randomPosition;
+            newObject.transform.SetParent(root, true);
 
             MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
             MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
@@ -93,6 +95,8 @@ public class RandomGenerateMeshWithGpuInstance : MonoBehaviour
             meshRenderer.sharedMaterial = instancedMaterial;
             
             meshRenderer.sharedMaterial.SetTexture("_Textures", spriteTextures);
+            meshRenderer.sharedMaterial.SetTexture("_MainTex2", texture2);
+            meshRenderer.sharedMaterial.SetTexture("_MainTex3", texture3);
             meshFilter.sharedMesh = quadMesh;
             
             // Calculate vertices translate and scale value
