@@ -48,7 +48,6 @@ Shader "Unlit/MeshGPUInstance"
             
             UNITY_INSTANCING_BUFFER_START(Props)
             UNITY_DEFINE_INSTANCED_PROP(float, _TextureIndex)
-            UNITY_DEFINE_INSTANCED_PROP(half4, _Pivot)
             UNITY_INSTANCING_BUFFER_END(Props)
 
             half4 _RendererColor;
@@ -89,18 +88,7 @@ Shader "Unlit/MeshGPUInstance"
                 UNITY_SETUP_INSTANCE_ID (IN);
                 UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
 
-                // vertices transform matrix
-                half4 pivot = UNITY_ACCESS_INSTANCED_PROP(Props, _Pivot);
-                half4x4 m;
-                m._11 = pivot.x; m._12 = 0; m._13 = 0; m._14 = pivot.z;
-                m._21 = 0; m._22 = pivot.y; m._23 = 0; m._24 = pivot.w;
-                m._31 = 0; m._32 = 0; m._33 = 1; m._34 = 0;
-                m._41 = 0; m._42 = 0; m._43 = 0; m._44 = 1;
-
                 OUT.vertex = UnityFlipSprite(IN.vertex.xyz, _Flip);
-
-                // transform quad's original mesh to sprite's mesh
-                OUT.vertex = mul(m, OUT.vertex);
 
                 OUT.vertex = TransformWorldToHClip(TransformObjectToWorld(OUT.vertex.xyz));
                 OUT.texcoord = IN.texcoord;
@@ -136,7 +124,6 @@ Shader "Unlit/MeshGPUInstance"
 
             UNITY_INSTANCING_BUFFER_START(Props)
             UNITY_DEFINE_INSTANCED_PROP(float, _TextureIndex)
-            UNITY_DEFINE_INSTANCED_PROP(half4, _Pivot)
             UNITY_INSTANCING_BUFFER_END(Props)
 
             half4 _RendererColor;
@@ -177,18 +164,7 @@ Shader "Unlit/MeshGPUInstance"
                 UNITY_SETUP_INSTANCE_ID (IN);
                 UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
 
-                // vertices transform matrix
-                half4 pivot = UNITY_ACCESS_INSTANCED_PROP(Props, _Pivot);
-                half4x4 m;
-                m._11 = pivot.x; m._12 = 0; m._13 = 0; m._14 = pivot.z;
-                m._21 = 0; m._22 = pivot.y; m._23 = 0; m._24 = pivot.w;
-                m._31 = 0; m._32 = 0; m._33 = 1; m._34 = 0;
-                m._41 = 0; m._42 = 0; m._43 = 0; m._44 = 1;
-
                 OUT.vertex = UnityFlipSprite(IN.vertex.xyz, _Flip);
-
-                // transform quad's original mesh to sprite's mesh
-                OUT.vertex = mul(m, OUT.vertex);
 
                 OUT.vertex = TransformWorldToHClip(TransformObjectToWorld(OUT.vertex.xyz));
                 OUT.texcoord = IN.texcoord;

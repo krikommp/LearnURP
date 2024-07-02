@@ -81,6 +81,7 @@ public class RandomGenerateSprites : MonoBehaviour
             // Set the position of the new object
             newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
             newObject.transform.localPosition = randomPosition;
+            newObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             newObject.transform.SetParent(root, true);
         }
     }

@@ -80,7 +80,7 @@ public class RandomGenerateMeshWithDynamicBatch : MonoBehaviour
             GameObject newObject = new GameObject("GeneratedMeshObject");
             newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
             newObject.transform.localPosition = randomPosition;
-            newObject.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+            newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             newObject.transform.SetParent(root, true);
 
             MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();

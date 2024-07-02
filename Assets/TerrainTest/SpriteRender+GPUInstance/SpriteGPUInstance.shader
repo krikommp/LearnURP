@@ -5,7 +5,7 @@ Shader "Unlit/SpriteGPUInstance"
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         _ColorMap ("Color Map", 2D) = "white" {}
-        _ColorMap2 ("Color Map 2", 2D) = "white" {}
+        _ColorMap2 ("Color Map 2", 2D) = "white" {} // set global 采样
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)

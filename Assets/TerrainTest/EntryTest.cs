@@ -14,6 +14,12 @@ public class EntryTest : MonoBehaviour
 
     private void Start()
     {
+        #if UNITY_ANDROID && !UNITY_EDITOR
+        Application.targetFrameRate = 60;
+        #else
+        Application.targetFrameRate = -1;
+        #endif
+        
         // 确保 ScrollRect 和 Button 预制体已经在 Inspector 中分配
         if (scrollRect == null || buttonPrefab == null)
         {

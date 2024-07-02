@@ -72,10 +72,7 @@ public class RandomGenerateMeshWithGpuInstance : MonoBehaviour
         for (int i = 0; i < numToGenerate; i++)
         {
             int randomSpriteCount = Random.Range(0, sprites.Count);
-            Sprite randomSprite = sprites[randomSpriteCount];
             textureId = randomSpriteCount;
-            
-            Vector4 pivot; 
             
             // Select a random terrain from the list
             Terrain selectedTerrain = terrains[Random.Range(0, terrains.Count)];
@@ -98,15 +95,8 @@ public class RandomGenerateMeshWithGpuInstance : MonoBehaviour
             meshRenderer.sharedMaterial.SetTexture("_MainTex2", texture2);
             meshRenderer.sharedMaterial.SetTexture("_MainTex3", texture3);
             meshFilter.sharedMesh = quadMesh;
-            
-            // Calculate vertices translate and scale value
-            pivot.x = randomSprite.rect.width / randomSprite.pixelsPerUnit;
-            pivot.y = randomSprite.rect.height / randomSprite.pixelsPerUnit;
-            pivot.z = ((randomSprite.rect.width / 2) - randomSprite.pivot.x) / randomSprite.pixelsPerUnit;
-            pivot.w = ((randomSprite.rect.height / 2) - randomSprite.pivot.y) / randomSprite.pixelsPerUnit;
 
             props.SetFloat("_TextureIndex", textureId);
-            props.SetVector("_Pivot", pivot);
             
             meshRenderer.SetPropertyBlock(props);
         }

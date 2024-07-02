@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GeneratedSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 255f61787d2e78e469cadb1abb55bddb, type: 3}
+    - {fileID: 2800000, guid: ea9fc4e3ff3851543b77f05d4f7eba9d, type: 3}
+    - {fileID: 2800000, guid: 2d14259238abe304c8eaf7bf5a5bb4df, type: 3}
+    - {fileID: 2800000, guid: f948cc47a9ec7aa408c5f923721538cd, type: 3}
+    - {fileID: 2800000, guid: 7f4b10e24173c7f408be82bbcaa495a5, type: 3}
+    - {fileID: 2800000, guid: e5ef677c11630e64fb43b1aacc1e9a12, type: 3}
+    - {fileID: 2800000, guid: 9302de8be4887ea48bc608872c4ccbcc, type: 3}
+    - {fileID: 2800000, guid: 87e9b582a577c404b94a76a8a382d62b, type: 3}
+    - {fileID: 2800000, guid: 897cf5e0f359ee34eb6081841c7ca991, type: 3}
+    - {fileID: 2800000, guid: c9efc27460a7f1e42b917a29caa651ae, type: 3}
+    - {fileID: 2800000, guid: 795e5dab60955a448ad4d25b6d148c46, type: 3}
+    - {fileID: 2800000, guid: 93e3193193284f641859c09e564da9ba, type: 3}
+    - {fileID: 2800000, guid: 8d45846a347690f4abe71eebe172bc21, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys: []
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
+  m_RenderDataMap: {}
+  m_Tag: GeneratedSpriteAtlas
+  m_IsVariant: 0
