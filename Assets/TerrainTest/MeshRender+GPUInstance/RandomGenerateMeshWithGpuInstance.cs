@@ -85,37 +85,5 @@ public class RandomGenerateMeshWithGpuInstance : TerrainRoot
                 meshRenderer.SetPropertyBlock(props);
             }
         }
-
-        // for (int i = 0; i < numToGenerate; i++)
-        // {
-        //     int randomSpriteCount = Random.Range(0, sprites.Count);
-        //     textureId = randomSpriteCount;
-        //     
-        //     // Select a random terrain from the list
-        //     Terrain selectedTerrain = terrains[Random.Range(0, terrains.Count)];
-        //
-        //     // Generate a random position on the selected terrain
-        //     Vector3 randomPosition = GetRandomPositionOnTerrain(selectedTerrain);
-        //     randomPosition.y = GetTerrainHeight(selectedTerrain, randomPosition) + 1.5f;
-        //
-        //     GameObject newObject = new GameObject("GeneratedMeshObject");
-        //     newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-        //     newObject.transform.localPosition = randomPosition;
-        //     newObject.transform.SetParent(root, true);
-        //
-        //     MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-        //     MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-        //     meshRenderer.enabled = true;
-        //     meshRenderer.sharedMaterial = instancedMaterial;
-        //     
-        //     meshRenderer.sharedMaterial.SetTexture("_Textures", spriteTextures);
-        //     meshRenderer.sharedMaterial.SetTexture("_MainTex2", texture2);
-        //     meshRenderer.sharedMaterial.SetTexture("_MainTex3", texture3);
-        //     meshFilter.sharedMesh = quadMesh;
-        //
-        //     props.SetFloat("_TextureIndex", textureId);
-        //     
-        //     meshRenderer.SetPropertyBlock(props);
-        // }
     }
 }
