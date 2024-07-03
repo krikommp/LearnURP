@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class RandomGenerateMeshWithSRPBatch : MonoBehaviour
+public class RandomGenerateMeshWithSRPBatch : TerrainRoot
 {
-    [SerializeField] private List<Terrain> terrains = new List<Terrain>();
-    [SerializeField] private List<Texture2D> textures = new List<Texture2D>();
-    [SerializeField] private int numToGenerate = 1;
+    [SerializeField] private RandomSpawnData randomSpawnData;
+    [SerializeField] private List<TextureAtlasData> textureAtlasDatas;
     [SerializeField] private Transform root;
-    [SerializeField] private Material instancedMaterial;
     [SerializeField] private Mesh quadMesh;
-    [SerializeField] private Texture2D texture2;
-    [SerializeField] private Texture2D texture3;
+    [SerializeField] private Texture2D colorMask;
+    [SerializeField] private Texture2D shadowMap;
+    [SerializeField] private Material srpBatchMaterial;
     
     public void Clear()
     {
@@ -36,70 +36,50 @@ public class RandomGenerateMeshWithSRPBatch : MonoBehaviour
             return;
         }
 
-        if (textures.Count == 0)
-        {
-            Debug.LogError("No sprites assigned.");
-            return;
-        }
-        
         if (root == null)
         {
             Debug.LogError("No root transform assigned.");
             return;
         }
         
-        for (int i = 0; i < numToGenerate; i++)
+        if (randomSpawnData == null)
         {
-            int randomSpriteCount = Random.Range(0, textures.Count);
-            
-            // Select a random terrain from the list
-            Terrain selectedTerrain = terrains[Random.Range(0, terrains.Count)];
-
-            // Generate a random position on the selected terrain
-            Vector3 randomPosition = GetRandomPositionOnTerrain(selectedTerrain);
-            randomPosition.y = GetTerrainHeight(selectedTerrain, randomPosition) + 1.5f;
-
-            GameObject newObject = new GameObject("GeneratedMeshObject");
-            newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-            newObject.transform.localPosition = randomPosition;
-            newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            newObject.transform.SetParent(root, true);
-
-            MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-            MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-            meshRenderer.enabled = true;
-            meshRenderer.material = instancedMaterial;
-
-            var material = new Material(instancedMaterial);
-            material.SetTexture("_MainTex", textures[randomSpriteCount]);
-            material.SetTexture("_MainTex2", texture2);
-            material.SetTexture("_MainTex3", texture3);
-            meshRenderer.material = material;
-            meshFilter.mesh = quadMesh;
+            Debug.LogError("No random spawn data assigned.");
+            return;
         }
-    }
-    
-    private Vector3 GetRandomPositionOnTerrain(Terrain terrain)
-    {
-        Vector3 terrainPosition = terrain.transform.position;
-        Vector3 terrainSize = terrain.terrainData.size;
+        
+        Shader.SetGlobalTexture("_ColorMask", colorMask);
+        Shader.SetGlobalTexture("_ShadowMap", shadowMap);
 
-        float randomX = Random.Range(terrainPosition.x, terrainPosition.x + terrainSize.x);
-        float randomZ = Random.Range(terrainPosition.z, terrainPosition.z + terrainSize.z);
+        foreach (var textureAtlasData in textureAtlasDatas)
+        {
+            var atlasName = textureAtlasData.atlasName;
 
-        return new Vector3(randomX, 0, randomZ);
-    }
+            var spawnDatas = randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
+            for (int i = 0; i < spawnDatas.Count; ++i)
+            {
+                var spawnData = spawnDatas[i];
 
-    private float GetTerrainHeight(Terrain terrain, Vector3 position)
-    {
-        Vector3 terrainPosition = terrain.transform.position;
-        Vector3 terrainSize = terrain.terrainData.size;
+                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+                newObject.transform.eulerAngles = spawnData.eulerAngle;
+                var position = transform.position;
+                newObject.transform.localPosition = spawnData.position + position;
+                newObject.transform.SetParent(root, true);
+                newObject.transform.localScale = spawnData.scale;
 
-        float normalizedX = (position.x - terrainPosition.x) / terrainSize.x;
-        float normalizedZ = (position.z - terrainPosition.z) / terrainSize.z;
+                MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
+                MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
+                meshRenderer.enabled = true;
+                meshRenderer.material = srpBatchMaterial;
+                
+                meshFilter.mesh = quadMesh;
 
-        return terrain.terrainData.GetHeight(
-            (int)(Mathf.Clamp01(normalizedX) * terrain.terrainData.heightmapResolution),
-            (int)(Mathf.Clamp01(normalizedZ) * terrain.terrainData.heightmapResolution)) + terrainPosition.y;
+                var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
+                var rect = textureAtlasData.textureRects[idx];
+                
+                meshRenderer.material.SetTexture("_MainTex", textureAtlasData.atlas);
+                meshRenderer.material.SetVector("_NewUV", new Vector4(rect.x, rect.y, rect.width, rect.height));
+            }
+        }
     }
 }
