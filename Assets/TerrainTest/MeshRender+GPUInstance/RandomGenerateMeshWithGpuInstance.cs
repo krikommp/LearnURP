@@ -58,7 +58,7 @@ public class RandomGenerateMeshWithGpuInstance : TerrainRoot
         {
             var atlasName = textureAtlasData.atlasName;
             
-            textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas);
+            textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas); 
 
             var spawnDatas = randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
             for (int i = 0; i < spawnDatas.Count; ++i)

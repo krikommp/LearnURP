@@ -145,7 +145,7 @@ Shader "Unlit/MeshDynamicBatch"
                 half4 c3 = SAMPLE_TEXTURE2D(_ShadowMap, sampler_ShadowMap, IN.texcoord);
                 
                 half r = c.r * c2.r *c3.r;
-                c.r = r;
+                c.r = r * _Color.r;
                 
                 return c;
 

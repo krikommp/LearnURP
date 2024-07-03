@@ -1976,7 +1976,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 1742783541}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -2472,7 +2471,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 812618645}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -3320,7 +3318,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 880532055}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -5530,7 +5527,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 673715310}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -5761,7 +5757,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 1492769214}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -6461,7 +6456,7 @@ Transform:
   m_GameObject: {fileID: 1848395311}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 23, y: 25, z: -10}
+  m_LocalPosition: {x: 23, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6526,7 +6521,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 1826550304}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -6590,7 +6584,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 229382455}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -6779,7 +6772,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 1739653424}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
@@ -7027,7 +7019,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 205ae2e3dee46f64fb329b1f0b8a4839, type: 2}
   - {fileID: 11400000, guid: 68ab918a16c3e224eb2256c3282fff40, type: 2}
   root: {fileID: 1543475372}
-  instancedMaterial: {fileID: 2100000, guid: 0eb052b3a603d1b4dbe65f5efc03e43e, type: 2}
   quadMesh: {fileID: 7450741763379908841, guid: 1c77f6d24d6edcd41adee79c6ecca7a9,
     type: 3}
   colorMask: {fileID: 2800000, guid: 9744e11c9a81fba4d945a721f002e1de, type: 3}
