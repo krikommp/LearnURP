@@ -33,7 +33,6 @@ Shader "Unlit/MeshDynamicBatch"
             HLSLPROGRAM
             #pragma vertex SpriteVert
             #pragma fragment SpriteFrag
-            #pragma require 2darray
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float _TextureId;
@@ -46,7 +45,6 @@ Shader "Unlit/MeshDynamicBatch"
             struct appdata_t
             {
                 float4 vertex : POSITION;
-                float4 color : COLOR;
                 float2 texcoord : TEXCOORD0;
             };
 
@@ -54,7 +52,6 @@ Shader "Unlit/MeshDynamicBatch"
             {
                 float4 vertex : SV_POSITION;
                 float2 texcoord : TEXCOORD0;
-                float4 color : TEXCOORD1;
             };
 
             inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
@@ -67,7 +64,6 @@ Shader "Unlit/MeshDynamicBatch"
                 v2f OUT;
                 OUT.vertex = TransformObjectToHClip(IN.vertex.xyz);
                 OUT.texcoord = IN.texcoord;
-                OUT.color = IN.color;
                 return OUT;
             }
 
@@ -95,7 +91,6 @@ Shader "Unlit/MeshDynamicBatch"
             HLSLPROGRAM
             #pragma vertex SpriteVert
             #pragma fragment SpriteFrag
-            #pragma require 2darray
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             Texture2D _MainTex;

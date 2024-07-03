@@ -80,6 +80,7 @@ public class RandomGenerateSprites : TerrainRoot
                 GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
                 newObject.transform.eulerAngles = spawnData.eulerAngle;
                 var position = transform.position;
+                position.y += 1.5f;
                 newObject.transform.localPosition = spawnData.position + position;
                 newObject.transform.SetParent(root, true);
                 newObject.transform.localScale = spawnData.scale;

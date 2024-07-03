@@ -21,7 +21,7 @@ Shader "Unlit/Sprite"
             "CanUseSpriteAtlas"="True"
         }
         
-        Pass
+       Pass
         {
             Tags
             {
@@ -31,41 +31,55 @@ Shader "Unlit/Sprite"
             Cull Off
             ZWrite On
             ColorMask 0
-            
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma target 2.0
-            #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
+            HLSLPROGRAM
+            #pragma vertex SpriteVert
+            #pragma fragment SpriteFrag
+            #pragma require 2darray
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            struct appdata
+            float _TextureId;
+            half4 _RendererColor;
+            half2 _Flip;
+            float _EnableExternalAlpha;
+
+            half4 _Color;
+
+            struct appdata_t
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float2 texcoord : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 texcoord : TEXCOORD0;
             };
 
-            v2f vert (appdata v)
+            inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
-                return o;
+                return float4(pos.xy * flip, pos.z, 1.0);
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            v2f SpriteVert(appdata_t IN)
             {
-                return fixed4(1,1,1,1);
+                v2f OUT;
+                OUT.vertex = TransformObjectToHClip(IN.vertex.xyz);
+                OUT.texcoord = IN.texcoord;
+                return OUT;
             }
-            
-            ENDCG
+
+            Texture2D _MainTex;
+            SamplerState sampler_MainTex;
+
+            half4 SpriteFrag(v2f IN) : SV_Target
+            {
+                half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
+                clip(c.a - 0.5);
+                return half4(1,1,1,1);
+            }
+            ENDHLSL
         }
 
         Pass
@@ -73,54 +87,68 @@ Shader "Unlit/Sprite"
             Cull Off
             Lighting Off
             ZWrite Off
-            ZTest Off
+            ZTest Equal
             Blend One OneMinusSrcAlpha
-            
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma target 2.0
-            #pragma multi_compile_instancing
-            
-            #include "UnityCG.cginc"
 
-            struct appdata
+            HLSLPROGRAM
+            #pragma vertex SpriteVert
+            #pragma fragment SpriteFrag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            Texture2D _MainTex;
+            SamplerState sampler_MainTex;
+            Texture2D _ColorMask;
+            SamplerState sampler_ColorMask;
+            Texture2D _ShadowMap;
+            SamplerState sampler_ShadowMap;
+            
+            float _TextureId;
+            half4 _RendererColor;
+            half2 _Flip;
+            float _EnableExternalAlpha;
+
+            half4 _Color;
+
+            struct appdata_t
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float2 texcoord : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 texcoord : TEXCOORD0;
             };
 
-            sampler2D _MainTex;
-            sampler2D _ColorMask;
-            sampler2D _ShadowMap;
-
-            v2f vert (appdata v)
+            inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
-                return o;
+                return float4(pos.xy * flip, pos.z, 1.0);
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            v2f SpriteVert(appdata_t IN)
             {
-                fixed4 c = tex2D(_MainTex, i.uv);
-                c.rgb *= c.a;
-                fixed4 c2 = tex2D(_ColorMask, i.uv);
-                fixed4 c3 = tex2D(_ShadowMap, i.uv);
+                v2f OUT;
+                OUT.vertex = TransformObjectToHClip(IN.vertex.xyz);
+                OUT.texcoord = IN.texcoord;
+                return OUT;
+            }
 
+            half4 SpriteFrag(v2f IN) : SV_Target
+            {
+                // Now we sample texture from Texture2DArray
+                half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
+                c.rgb *= c.a;
+                
+                half4 c2 = SAMPLE_TEXTURE2D(_ColorMask, sampler_ColorMask, IN.texcoord);
+                half4 c3 = SAMPLE_TEXTURE2D(_ShadowMap, sampler_ShadowMap, IN.texcoord);
+                
                 half r = c.r * c2.r *c3.r;
                 c.r = r;
                 
                 return c;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }
