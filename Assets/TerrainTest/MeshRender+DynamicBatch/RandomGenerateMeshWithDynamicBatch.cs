@@ -72,9 +72,6 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
                 meshRenderer.enabled = true;
                 meshRenderer.sharedMaterial = textureAtlasData.material;
                 
-                // meshRenderer.sharedMaterial.SetTexture("_MainTex", textureAtlasData.atlas);
-                // meshRenderer.sharedMaterial.renderQueue = spawnData.renderqueue;
-                
                 var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
                 var rect = textureAtlasData.textureRects[idx];
             
