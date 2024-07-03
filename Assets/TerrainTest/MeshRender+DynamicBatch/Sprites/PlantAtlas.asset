@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef3de65f6ddb37f4e88f98b1f1221ad9, type: 3}
-  m_Name: TextureAtlasData
+  m_Name: PlantAtlas
   m_EditorClassIdentifier: 
-  atlas: {fileID: 2800000, guid: cbb476de8db5ef74f88ada7c3190b503, type: 3}
+  atlasName: PlantAtlas
+  atlas: {fileID: 2800000, guid: 9ec122d03ebbe1b4c9cd308a489e104c, type: 3}
   textureNames:
   - T_Grass_1
   - T_Plant_3

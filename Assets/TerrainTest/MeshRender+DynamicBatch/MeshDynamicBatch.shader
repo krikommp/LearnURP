@@ -2,9 +2,7 @@ Shader "Unlit/MeshDynamicBatch"
 {
     Properties
     {
-        _Textures("Textures", 2DArray) = "" {}
-        _MainTex2 ("Sprite Texture2", 2D) = "white" {}
-        _MainTex3 ("Sprite Texture3", 2D) = "white" {}
+        _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
@@ -37,9 +35,6 @@ Shader "Unlit/MeshDynamicBatch"
             #pragma fragment SpriteFrag
             #pragma require 2darray
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            Texture2DArray _Textures;
-            SamplerState sampler_Textures;
 
             float _TextureId;
             half4 _RendererColor;
@@ -76,8 +71,13 @@ Shader "Unlit/MeshDynamicBatch"
                 return OUT;
             }
 
+            Texture2D _MainTex;
+            SamplerState sampler_MainTex;
+
             half4 SpriteFrag(v2f IN) : SV_Target
             {
+                half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
+                clip(c.a - 0.5);
                 return half4(1,1,1,1);
             }
             ENDHLSL
@@ -89,7 +89,7 @@ Shader "Unlit/MeshDynamicBatch"
             Cull Off
             Lighting Off
             ZWrite Off
-            ZTest Off
+            ZTest Equal
             Blend One OneMinusSrcAlpha
 
             HLSLPROGRAM
@@ -98,12 +98,12 @@ Shader "Unlit/MeshDynamicBatch"
             #pragma require 2darray
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            Texture2DArray _Textures;
-            SamplerState sampler_Textures;
-            Texture2D _MainTex2;
-            SamplerState sampler_MainTex2;
-            Texture2D _MainTex3;
-            SamplerState sampler_MainTex3;
+            Texture2D _MainTex;
+            SamplerState sampler_MainTex;
+            Texture2D _ColorMask;
+            SamplerState sampler_ColorMask;
+            Texture2D _ShadowMap;
+            SamplerState sampler_ShadowMap;
             
             float _TextureId;
             half4 _RendererColor;
@@ -143,16 +143,18 @@ Shader "Unlit/MeshDynamicBatch"
             half4 SpriteFrag(v2f IN) : SV_Target
             {
                 // Now we sample texture from Texture2DArray
-                half4 c = _Textures.Sample(sampler_Textures,
-                                           float3(IN.texcoord, IN.color.r * 5));
-                half4 c2 = SAMPLE_TEXTURE2D(_MainTex2, sampler_MainTex2, IN.texcoord);
-                half4 c3 = SAMPLE_TEXTURE2D(_MainTex3, sampler_MainTex3, IN.texcoord);
+                half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
+                c.rgb *= c.a;
+                
+                half4 c2 = SAMPLE_TEXTURE2D(_ColorMask, sampler_ColorMask, IN.texcoord);
+                half4 c3 = SAMPLE_TEXTURE2D(_ShadowMap, sampler_ShadowMap, IN.texcoord);
+                
                 half r = c.r * c2.r *c3.r;
                 c.r = r;
                 
                 return c;
 
-                // return half4(IN.color.xyz, 1.0f);
+                // return half4(IN.texcoord, 1.0f, 1.0f);
             }
             ENDHLSL
         }

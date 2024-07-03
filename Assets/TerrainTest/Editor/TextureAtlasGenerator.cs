@@ -13,6 +13,7 @@ public class TextureAtlasGenerator : EditorWindow
 {
     private string folderPath;
     private string outputFolder;
+    private string atlasName;
     public int atlasWidth = 2048; // 大纹理的宽度
     public int atlasHeight = 2048; // 大纹理的高度
 
@@ -46,7 +47,9 @@ public class TextureAtlasGenerator : EditorWindow
             EditorGUILayout.LabelField("Output Folder", outputFolder);
         }
         
-        if (!string.IsNullOrEmpty(folderPath) && !string.IsNullOrEmpty(outputFolder))
+        atlasName = EditorGUILayout.TextField("Atlas Name", atlasName);
+        
+        if (!string.IsNullOrEmpty(folderPath) && !string.IsNullOrEmpty(outputFolder) && !string.IsNullOrEmpty(atlasName))
         {
             if (GUILayout.Button("Generate Sprite Atlas"))
             {
@@ -67,7 +70,7 @@ public class TextureAtlasGenerator : EditorWindow
 
         string[] imageFiles = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
         Texture2D[] textures = imageFiles
-            .Where(file => file.EndsWith(".png") || file.EndsWith(".jpg"))
+            .Where(file => file.EndsWith(".png") || file.EndsWith(".jpg") || file.EndsWith(".jpeg") || file.EndsWith(".tga"))
             .Select(file => AssetDatabase.LoadAssetAtPath<Texture2D>(GetRelativeAssetPath(file)))
             .Where(texture => texture != null)
             .ToArray();
@@ -84,9 +87,10 @@ public class TextureAtlasGenerator : EditorWindow
         Rect[] rects = atlasTexture.PackTextures(textures.ToArray(), 0, atlasWidth);
         
         // 保存合并后的纹理
-        File.WriteAllBytes(outputFolder + "/TextureAtlas.png", atlasTexture.EncodeToPNG());
+        File.WriteAllBytes(Path.Combine(outputFolder, atlasName + ".png"), atlasTexture.EncodeToPNG());
 
         var textureAtlas = ScriptableObject.CreateInstance<TextureAtlasData>();
+        textureAtlas.atlasName = atlasName;
         textureAtlas.atlas = atlasTexture;
         for (int i = 0; i < textures.Length; ++i)
         {
@@ -99,7 +103,7 @@ public class TextureAtlasGenerator : EditorWindow
         }
         
         // 保存为 Asset
-        string assetPath = Path.Combine(outputFolder, "TextureAtlasData" + ".asset");
+        string assetPath = Path.Combine(outputFolder, atlasName + ".asset");
         AssetDatabase.CreateAsset(textureAtlas, ConvertToRelativePath(assetPath));
         AssetDatabase.SaveAssets();
     }
