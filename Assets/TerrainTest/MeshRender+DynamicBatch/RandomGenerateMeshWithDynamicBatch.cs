@@ -93,54 +93,5 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
                 meshFilter.mesh = newMesh;
             }
         }
-        
-        //
-        // for (int i = 0; i < numToGenerate; i++)
-        // {
-        //     float randomSpriteCount = Random.Range(0, textures.Count);
-        //     
-        //     // Select a random terrain from the list
-        //     Terrain selectedTerrain = terrains[Random.Range(0, terrains.Count)];
-        //
-        //     // Generate a random position on the selected terrain
-        //     Vector3 randomPosition = GetRandomPositionOnTerrain(selectedTerrain);
-        //     randomPosition.y = GetTerrainHeight(selectedTerrain, randomPosition) + 1.5f;
-        //
-        //     GameObject newObject = new GameObject("GeneratedMeshObject");
-        //     newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-        //     newObject.transform.localPosition = randomPosition;
-        //     newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        //     newObject.transform.SetParent(root, true);
-        //
-        //     MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-        //     MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-        //     meshRenderer.enabled = true;
-        //     meshRenderer.sharedMaterial = instancedMaterial;
-        //     
-        //     meshRenderer.sharedMaterial.SetTexture("_MainTex", textureAtlasData.atlas);
-        //     meshRenderer.sharedMaterial.SetTexture("_MainTex2", texture2);
-        //     meshRenderer.sharedMaterial.SetTexture("_MainTex3", texture3);
-        //
-        //     var idx = textureAtlasData.textureNames.IndexOf(textures[(int)randomSpriteCount].name);
-        //     
-        //     var rect = textureAtlasData.textureRects[idx];
-        //     
-        //     var newMesh = new Mesh();
-        //     newMesh.name = "newMesh";
-        //     newMesh.vertices = quadMesh.vertices;
-        //     newMesh.triangles = quadMesh.triangles;
-        //     // newMesh.uv = quadMesh.uv;
-        //     
-        //     Vector2[] newUV = new Vector2[4];
-        //     newUV[0] = new Vector2(rect.x, rect.y);
-        //     newUV[1] = new Vector2(rect.x, rect.y + rect.height);
-        //     newUV[2] = new Vector2(rect.x + rect.width, rect.y + rect.height);
-        //     newUV[3] = new Vector2(rect.x + rect.width, rect.y);
-        //     newMesh.uv = newUV;
-        //
-        //     meshFilter.mesh = newMesh;
-        //     
-        //     meshRenderer.SetPropertyBlock(props);
-        // }
     }
 }
