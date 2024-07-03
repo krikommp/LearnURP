@@ -4,8 +4,6 @@ Shader "Unlit/Sprite"
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        _ColorMap ("Color Map", 2D) = "white" {}
-        _ColorMap2 ("Color Map 2", 2D) = "white" {}
         [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
@@ -99,8 +97,8 @@ Shader "Unlit/Sprite"
             };
 
             sampler2D _MainTex;
-            sampler2D _ColorMap;
-            sampler2D _ColorMap2;
+            sampler2D _ColorMask;
+            sampler2D _ShadowMap;
 
             v2f vert (appdata v)
             {
@@ -114,8 +112,8 @@ Shader "Unlit/Sprite"
             {
                 fixed4 c = tex2D(_MainTex, i.uv);
                 c.rgb *= c.a;
-                fixed4 c2 = tex2D(_ColorMap, i.uv);
-                fixed4 c3 = tex2D(_ColorMap2, i.uv);
+                fixed4 c2 = tex2D(_ColorMask, i.uv);
+                fixed4 c3 = tex2D(_ShadowMap, i.uv);
 
                 half r = c.r * c2.r *c3.r;
                 c.r = r;

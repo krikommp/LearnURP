@@ -1,16 +1,23 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.U2D;
 
-public class RandomGenerateSprites : MonoBehaviour
+[Serializable]
+public class SpriteAtlasAndMat
 {
-    [SerializeField] private List<Terrain> terrains = new List<Terrain>();
-    [SerializeField] private List<Sprite> sprites = new List<Sprite>();
-    [SerializeField] private SpriteAtlas spriteAtlas;
-    [SerializeField] private int numToGenerate = 1;
+    public SpriteAtlas spriteAtlas;
+    public Material material;
+}
+
+public class RandomGenerateSprites : TerrainRoot
+{
+    [SerializeField] private RandomSpawnData randomSpawnData;
     [SerializeField] private Transform root;
-    [SerializeField] private bool useSpriteAtlas = true;
-    [SerializeField] private Material spriteMaterial;
+    [SerializeField] private Texture2D colorMask;
+    [SerializeField] private Texture2D shadowMap;
+    [SerializeField] private List<SpriteAtlasAndMat> spriteAtlasAndMats;
     
     private void Start()
     {
@@ -34,77 +41,53 @@ public class RandomGenerateSprites : MonoBehaviour
             return;
         }
 
-        if (sprites.Count == 0)
-        {
-            Debug.LogError("No sprites assigned.");
-            return;
-        }
-        
         if (root == null)
         {
             Debug.LogError("No root transform assigned.");
             return;
         }
-
-        if (spriteAtlas == null)
+        
+        if (randomSpawnData == null)
         {
-            Debug.LogError("No sprite atlas assigned.");
+            Debug.LogError("No random spawn data assigned.");
+            return;
+        }
+        
+        if (spriteAtlasAndMats == null)
+        {
+            Debug.LogError("No sprite atlases assigned.");
             return;
         }
 
-        for (int i = 0; i < numToGenerate; i++)
+        Shader.SetGlobalTexture("_ColorMask", colorMask);
+        Shader.SetGlobalTexture("_ShadowMap", shadowMap);
+
+        for (int i = 0; i < randomSpawnData.items.Count; ++i)
         {
-            // Select a random terrain from the list
-            Terrain selectedTerrain = terrains[Random.Range(0, terrains.Count)];
+            var spawnData = randomSpawnData.items[i];
 
-            // Generate a random position on the selected terrain
-            Vector3 randomPosition = GetRandomPositionOnTerrain(selectedTerrain);
-            randomPosition.y = GetTerrainHeight(selectedTerrain, randomPosition) + 1.5f;
-
-            // Create a new GameObject and add a SpriteRenderer
-            GameObject newObject = new GameObject("GeneratedSpriteObject");
-            SpriteRenderer spriteRenderer = newObject.AddComponent<SpriteRenderer>();
-
-            if (useSpriteAtlas)
+            var sm = spriteAtlasAndMats.FirstOrDefault(sm => sm.spriteAtlas.GetSprite(spawnData.name) != null);
+            if (sm != null)
             {
-                spriteRenderer.sprite = spriteAtlas.GetSprite(sprites[Random.Range(0, sprites.Count)].name);
-            }
-            else
-            {
-                spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
-            }
+                var sprite = sm.spriteAtlas.GetSprite(spawnData.name);
             
-            spriteRenderer.SetMaterials(new List<Material>() { spriteMaterial });
-
-            // spriteRenderer.sortingOrder = i % 2;
-
-            // Set the position of the new object
-            newObject.transform.eulerAngles = new Vector3(-45, 180, 0);
-            newObject.transform.localPosition = randomPosition;
-            newObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            newObject.transform.SetParent(root, true);
+                if (sprite == null)
+                {
+                    Debug.LogError($"Sprite {spawnData.name} not found in any sprite atlas.");
+                    continue;
+                }
+            
+                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+                newObject.transform.eulerAngles = spawnData.eulerAngle;
+                var position = transform.position;
+                newObject.transform.localPosition = spawnData.position + position;
+                newObject.transform.SetParent(root, true);
+                newObject.transform.localScale = spawnData.scale;
+            
+                SpriteRenderer spriteRenderer = newObject.AddComponent<SpriteRenderer>();
+                spriteRenderer.sharedMaterial = sm.material;
+                spriteRenderer.sprite = sprite;
+            }
         }
-    }
-
-    private Vector3 GetRandomPositionOnTerrain(Terrain terrain)
-    {
-        Vector3 terrainPosition = terrain.transform.position;
-        Vector3 terrainSize = terrain.terrainData.size;
-
-        float randomX = Random.Range(terrainPosition.x, terrainPosition.x + terrainSize.x);
-        float randomZ = Random.Range(terrainPosition.z, terrainPosition.z + terrainSize.z);
-
-        return new Vector3(randomX, 0, randomZ);
-    }
-
-    private float GetTerrainHeight(Terrain terrain, Vector3 position)
-    {
-        Vector3 terrainPosition = terrain.transform.position;
-        Vector3 terrainSize = terrain.terrainData.size;
-
-        float normalizedX = (position.x - terrainPosition.x) / terrainSize.x;
-        float normalizedZ = (position.z - terrainPosition.z) / terrainSize.z;
-
-        return terrain.terrainData.GetHeight((int)(Mathf.Clamp01(normalizedX) * terrain.terrainData.heightmapResolution), (int)(Mathf.Clamp01(normalizedZ) * terrain.terrainData.heightmapResolution)) + terrainPosition.y;
     }
 }
