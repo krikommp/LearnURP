@@ -55,7 +55,7 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
             
             textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas);
 
-            var spawnDatas = randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
+            var spawnDatas = atlasName == "SingleAtlas" ? randomSpawnData.items : randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
             for (int i = 0; i < spawnDatas.Count; ++i)
             {
                 var spawnData = spawnDatas[i];

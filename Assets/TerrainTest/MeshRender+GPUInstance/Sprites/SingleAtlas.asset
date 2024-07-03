@@ -1,0 +1,278 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3de65f6ddb37f4e88f98b1f1221ad9, type: 3}
+  m_Name: SingleAtlas
+  m_EditorClassIdentifier: 
+  atlasName: SingleAtlas
+  atlas: {fileID: 2800000, guid: c14501631a602694bab338ea591fbfa2, type: 3}
+  textureNames:
+  - T_Bridge_al
+  - T_Bridge_ol
+  - T_Fortress_1
+  - T_Grass_1
+  - T_mountain_1
+  - T_mountain_2
+  - T_mountain_3
+  - T_mountain_4
+  - T_Plant_3
+  - T_Plant_3b
+  - T_Plant_3b_ruin
+  - T_Plant_3c
+  - T_Plant_3c_ruin
+  - T_Plant_3d
+  - T_Plant_3d_ruin
+  - T_Plant_3_2
+  - T_Plant_3_2b
+  - T_Plant_3_2c
+  - T_Plant_3_ruin
+  - T_Plant_4
+  - T_Plant_4b
+  - T_Plant_4c
+  - T_Plant_4d
+  - T_Rock_1
+  - T_Rock_1b
+  - T_Rock_2
+  - T_Rock_3
+  - T_Rock_4
+  - T_Rock_5
+  - T_Rock_6
+  - T_Rock_7
+  - T_Rock_9
+  - T_Shrub_1
+  - T_Shrub_1b
+  - T_Shrub_1c
+  - T_Shrub_2
+  - T_Shrub_2b
+  - T_Tree_01
+  - T_Tree_01c
+  - T_Tree_02
+  - T_Tree_03
+  - T_Tree_04
+  - T_Village_3
+  textureRects:
+  - serializedVersion: 2
+    x: 0.5625
+    y: 0.46875
+    width: 0.1875
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.5625
+    y: 0.375
+    width: 0.1875
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.5625
+    width: 0.09375
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0
+    y: 0.9375
+    width: 0.104003906
+    height: 0.05126953
+  - serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0.375
+    height: 0.375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0
+    width: 0.375
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0
+    y: 0.75
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.1875
+    width: 0.375
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.46875
+    y: 0.65625
+    width: 0.04248047
+    height: 0.063964844
+  - serializedVersion: 2
+    x: 0.5102539
+    y: 0.72021484
+    width: 0.041015625
+    height: 0.06298828
+  - serializedVersion: 2
+    x: 0.46875
+    y: 0.7832031
+    width: 0.041015625
+    height: 0.06298828
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.09375
+    width: 0.044433594
+    height: 0.06982422
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.1875
+    width: 0.044433594
+    height: 0.06982422
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.25732422
+    width: 0.044433594
+    height: 0.06982422
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.375
+    width: 0.044433594
+    height: 0.06982422
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.46875
+    width: 0.043945312
+    height: 0.06347656
+  - serializedVersion: 2
+    x: 0.46875
+    y: 0.72021484
+    width: 0.041503906
+    height: 0.06298828
+  - serializedVersion: 2
+    x: 0.23632812
+    y: 0.9375
+    width: 0.04248047
+    height: 0.061035156
+  - serializedVersion: 2
+    x: 0.51123047
+    y: 0.65625
+    width: 0.04248047
+    height: 0.063964844
+  - serializedVersion: 2
+    x: 0.15283203
+    y: 0.9375
+    width: 0.024414062
+    height: 0.057128906
+  - serializedVersion: 2
+    x: 0.41601562
+    y: 0.9375
+    width: 0.020507812
+    height: 0.052734375
+  - serializedVersion: 2
+    x: 0.9819336
+    y: 0.09375
+    width: 0.017578125
+    height: 0.052734375
+  - serializedVersion: 2
+    x: 0.9819336
+    y: 0.1875
+    width: 0.017578125
+    height: 0.052734375
+  - serializedVersion: 2
+    x: 0.46875
+    y: 0.5625
+    width: 0.09375
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.65625
+    width: 0.09375
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0.32714844
+    width: 0.0234375
+    height: 0.046875
+  - serializedVersion: 2
+    x: 0.9375
+    y: 0
+    width: 0.046875
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0
+    y: 0.375
+    width: 0.375
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.75
+    y: 0.375
+    width: 0.1875
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.75
+    width: 0.09375
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.84375
+    width: 0.09375
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.75
+    y: 0.46875
+    width: 0.1875
+    height: 0.09375
+  - serializedVersion: 2
+    x: 0.1875
+    y: 0.9375
+    width: 0.048828125
+    height: 0.056152344
+  - serializedVersion: 2
+    x: 0.2788086
+    y: 0.9375
+    width: 0.04296875
+    height: 0.05859375
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.9375
+    width: 0.041015625
+    height: 0.05419922
+  - serializedVersion: 2
+    x: 0.104003906
+    y: 0.9375
+    width: 0.048828125
+    height: 0.057128906
+  - serializedVersion: 2
+    x: 0.32177734
+    y: 0.9375
+    width: 0.040527344
+    height: 0.05859375
+  - serializedVersion: 2
+    x: 0
+    y: 0.5625
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.75
+    y: 0.1875
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.75
+    y: 0
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.375
+    y: 0.375
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.1875
+    y: 0.75
+    width: 0.1875
+    height: 0.1875
+  - serializedVersion: 2
+    x: 0.1875
+    y: 0.5625
+    width: 0.1875
+    height: 0.1875
+  textureIds: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a000000
+  material: {fileID: 2100000, guid: 6f9b7123a659a484589a5843e3e7ec87, type: 2}

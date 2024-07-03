@@ -50,7 +50,11 @@ public class CameraCtrl : MonoBehaviour
 
         // 根据移动速度移动相机
         if (Camera.main != null) Camera.main.transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
-        if (Camera.main != null) Camera.main.orthographicSize += orthoSize * zoomSpeed * Time.deltaTime;
+        if (Camera.main != null) 
+        {
+            Camera.main.orthographicSize += orthoSize * zoomSpeed * Time.deltaTime;
+            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, 5f, 8f);
+        }
     }
 
     // 这些方法可以绑定到 UI 按钮的 onClick 事件上
