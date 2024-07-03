@@ -41,3 +41,4 @@ MonoBehaviour:
     width: 0.5
     height: 0.5
   textureIds: 00000000010000000200000003000000
+  material: {fileID: 2100000, guid: 8ff35ad67ec85104f8bbbe09b05fcb81, type: 2}

@@ -7,7 +7,6 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
     [SerializeField] private RandomSpawnData randomSpawnData;
     [SerializeField] private List<TextureAtlasData> textureAtlasDatas;
     [SerializeField] private Transform root;
-    [SerializeField] private Material instancedMaterial;
     [SerializeField] private Mesh quadMesh;
     [SerializeField] private Texture2D colorMask;
     [SerializeField] private Texture2D shadowMap;
@@ -53,7 +52,8 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
         foreach (var textureAtlasData in textureAtlasDatas)
         {
             var atlasName = textureAtlasData.atlasName;
-            var newMat = new Material(instancedMaterial);
+            
+            textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas);
 
             var spawnDatas = randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
             for (int i = 0; i < spawnDatas.Count; ++i)
@@ -70,10 +70,10 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
                 MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
                 MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
                 meshRenderer.enabled = true;
-                meshRenderer.sharedMaterial = newMat;
+                meshRenderer.sharedMaterial = textureAtlasData.material;
                 
-                meshRenderer.sharedMaterial.SetTexture("_MainTex", textureAtlasData.atlas);
-                meshRenderer.sharedMaterial.renderQueue = spawnData.renderqueue;
+                // meshRenderer.sharedMaterial.SetTexture("_MainTex", textureAtlasData.atlas);
+                // meshRenderer.sharedMaterial.renderQueue = spawnData.renderqueue;
                 
                 var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
                 var rect = textureAtlasData.textureRects[idx];
