@@ -21,9 +21,15 @@ EditorBuildSettings:
     path: Assets/TerrainTest/MeshRender+SRPBatch/Test.unity
     guid: 1b898e204ec81124bbe78f93596a9b73
   - enabled: 1
-    path: Assets/TerrainTest/SpriteRender+DynamiBbatch/Test.unity
+    path: Assets/TerrainTest/SpriteRender+DynamiBbatch+FullRect/Test.unity
     guid: 03620217ff130b54a86f305b49002632
   - enabled: 1
-    path: Assets/TerrainTest/SpriteRender+GPUInstance/Test.unity
+    path: Assets/TerrainTest/SpriteRender+GPUInstance+FullRect/Test.unity
     guid: 27e500e9c8f36c04888457a40a8c41f2
+  - enabled: 1
+    path: Assets/TerrainTest/SpriteRender+DynamiBbatch+Tight/Test.unity
+    guid: 88fdb2b816667ac44aeb96db5f05aa44
+  - enabled: 1
+    path: Assets/TerrainTest/SpriteRender+GPUInstance+Tight/Test.unity
+    guid: 65c41632252c9ba45a35003250535b0c
   m_configObjects: {}

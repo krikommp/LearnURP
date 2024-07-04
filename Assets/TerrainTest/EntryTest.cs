@@ -33,8 +33,10 @@ public class EntryTest : MonoBehaviour
             {2, "MeshRender+DynamicBatch"},
             {3, "MeshRender+GPUInstance"},
             {4, "MeshRender+SRPBatch"},
-            {5, "SpriteRender+DynamicBatch"},
-            {6, "SpriteRender+GPUInstance"}
+            {5, "SpriteRender+DynamicBatch+FullRect"},
+            {6, "SpriteRender+GPUInstance+FullRect"},
+            {7, "SpriteRender+DynamicBatch+Tight"},
+            {8, "SpriteRender+GPUInstance+Tight"},
         };
 
         foreach (var (sceneIndex, sceneName) in sceneIndexList)
