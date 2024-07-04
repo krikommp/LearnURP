@@ -4,6 +4,7 @@ Shader "Unlit/MeshDynamicBatch"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
+        [PerRendererData] _Float("Float", Float) = 0
     }
     SubShader
     {

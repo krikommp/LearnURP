@@ -10,6 +10,8 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
     [SerializeField] private Mesh quadMesh;
     [SerializeField] private Texture2D colorMask;
     [SerializeField] private Texture2D shadowMap;
+
+    // private MaterialPropertyBlock prop;
     
     public void Clear()
     {
@@ -50,7 +52,8 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
         
         Shader.SetGlobalTexture("_ColorMask", colorMask);
         Shader.SetGlobalTexture("_ShadowMap", shadowMap);
-        
+
+        // prop = new MaterialPropertyBlock();
         
         foreach (var textureAtlasData in textureAtlasDatas)
         {
@@ -91,8 +94,12 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
                 newUV[2] = new Vector2(rect.x + rect.width, rect.y + rect.height);
                 newUV[3] = new Vector2(rect.x + rect.width, rect.y);
                 newMesh.uv = newUV;
+                
+                // prop.SetFloat("_Float", (float)i);
             
                 meshFilter.mesh = newMesh;
+                
+                // meshRenderer.SetPropertyBlock(prop);
             }
         }
     }
