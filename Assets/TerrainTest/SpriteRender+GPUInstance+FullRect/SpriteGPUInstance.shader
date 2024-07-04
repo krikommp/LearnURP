@@ -1,4 +1,4 @@
-Shader "Unlit/SpriteGPUInstance"
+Shader "Unlit/SpriteGPUInstance-FullRect"
 {
     Properties
     {

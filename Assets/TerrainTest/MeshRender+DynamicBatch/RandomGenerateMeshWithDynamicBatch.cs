@@ -28,6 +28,8 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
 
     public void Generate()
     {
+        Debug.Log("Generate mesh with dynamic batch.");
+        
         if (terrains.Count == 0)
         {
             Debug.LogError("No terrains assigned.");
@@ -49,8 +51,11 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
         Shader.SetGlobalTexture("_ColorMask", colorMask);
         Shader.SetGlobalTexture("_ShadowMap", shadowMap);
         
+        
         foreach (var textureAtlasData in textureAtlasDatas)
         {
+            Debug.Log($"Generate mesh with dynamic batch: {textureAtlasData.atlasName}");
+            
             var atlasName = textureAtlasData.atlasName;
             
             textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas);

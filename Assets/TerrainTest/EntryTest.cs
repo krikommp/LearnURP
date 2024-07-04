@@ -15,7 +15,7 @@ public class EntryTest : MonoBehaviour
     private void Start()
     {
         #if UNITY_ANDROID && !UNITY_EDITOR
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         #else
         Application.targetFrameRate = -1;
         #endif

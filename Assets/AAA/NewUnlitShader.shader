@@ -1,4 +1,4 @@
-Shader "Unlit/MeshDynamicBatch"
+Shader "Unlit/NewUnlitShader"
 {
     Properties
     {
@@ -12,59 +12,6 @@ Shader "Unlit/MeshDynamicBatch"
             "Queue"="Transparent"
             "IgnoreProjector"="True"
             "RenderType"="Transparent"
-        }
-        
-        Pass
-        {
-            Tags
-            {
-                "LightMode" = "PreDepth"
-            }
-            
-            Cull Off
-            ZWrite On
-            ColorMask 0
-
-            HLSLPROGRAM
-            #pragma vertex SpriteVert
-            #pragma fragment SpriteFrag
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-            struct appdata_t
-            {
-                float4 vertex : POSITION;
-                float2 texcoord : TEXCOORD0;
-            };
-
-            struct v2f
-            {
-                float4 vertex : SV_POSITION;
-                float2 texcoord : TEXCOORD0;
-            };
-
-            inline float4 UnityFlipSprite(in float3 pos, in half2 flip)
-            {
-                return float4(pos.xy * flip, pos.z, 1.0);
-            }
-
-            v2f SpriteVert(appdata_t IN)
-            {
-                v2f OUT;
-                OUT.vertex = TransformObjectToHClip(IN.vertex.xyz);
-                OUT.texcoord = IN.texcoord;
-                return OUT;
-            }
-
-            Texture2D _MainTex;
-            SamplerState sampler_MainTex;
-
-            half4 SpriteFrag(v2f IN) : SV_Target
-            {
-                half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord);
-                clip(c.a - 0.7);
-                return half4(1,1,1,1);
-            }
-            ENDHLSL
         }
 
         Pass

@@ -1,4 +1,4 @@
-Shader "Unlit/Sprite"
+Shader "Unlit/Sprite-Tight"
 {
     Properties
     {
@@ -87,7 +87,7 @@ Shader "Unlit/Sprite"
             Cull Off
             Lighting Off
             ZWrite Off
-            ZTest Equal
+            ZTest Off
             Blend One OneMinusSrcAlpha
 
             HLSLPROGRAM
