@@ -19,6 +19,8 @@ public class RandomGenerateSprites : TerrainRoot
     [SerializeField] private Texture2D shadowMap;
     [SerializeField] private List<SpriteAtlasAndMat> spriteAtlasAndMats;
     
+    private Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
+    
     private void Start()
     {
         Clear();
@@ -65,13 +67,17 @@ public class RandomGenerateSprites : TerrainRoot
         for (int i = 0; i < randomSpawnData.items.Count; ++i)
         {
             var spawnData = randomSpawnData.items[i];
-            var name = "T_Grass_1";
+            var name = spawnData.name;
 
             var sm = spriteAtlasAndMats.FirstOrDefault(sm => sm.spriteAtlas.GetSprite(name) != null);
             if (sm != null)
             {
-                var sprite = sm.spriteAtlas.GetSprite(name);
-            
+                if (!spriteCache.TryGetValue(name, out var sprite))
+                {
+                    sprite = sm.spriteAtlas.GetSprite(name);
+                    spriteCache.Add(name, sprite);
+                }
+
                 if (sprite == null)
                 {
                     Debug.LogError($"Sprite {name} not found in any sprite atlas.");
@@ -84,7 +90,7 @@ public class RandomGenerateSprites : TerrainRoot
                 position.y += 1.5f;
                 newObject.transform.localPosition = spawnData.position + position;
                 newObject.transform.SetParent(root, true);
-                // newObject.transform.localScale = spawnData.scale;
+                newObject.transform.localScale = spawnData.scale;
             
                 SpriteRenderer spriteRenderer = newObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sharedMaterial = sm.material;
