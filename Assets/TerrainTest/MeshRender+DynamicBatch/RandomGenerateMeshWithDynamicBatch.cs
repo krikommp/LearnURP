@@ -12,6 +12,7 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
     [SerializeField] private Texture2D shadowMap;
 
     // private MaterialPropertyBlock prop;
+    // private Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
     
     public void Clear()
     {
@@ -54,6 +55,49 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
         Shader.SetGlobalTexture("_ShadowMap", shadowMap);
 
         // prop = new MaterialPropertyBlock();
+
+        // foreach (var atlasData in textureAtlasDatas)
+        // {
+        //     atlasData.material.SetTexture();
+        // }
+
+        var spawnDatas = randomSpawnData.items;
+        for (int i = 0; i < spawnDatas.Count; ++i)
+        {
+            var spawnData = spawnDatas[i];
+                
+            GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+            newObject.transform.eulerAngles = spawnData.eulerAngle;
+            var position = transform.position;
+            newObject.transform.localPosition = spawnData.position + position;
+            newObject.transform.SetParent(root, true);
+            newObject.transform.localScale = spawnData.scale;
+            
+            MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
+            meshRenderer.enabled = true;
+            
+            var textureAtlasData = textureAtlasDatas.Find(t => t.atlasName == spawnData.atlas);
+            
+            meshRenderer.sharedMaterial = textureAtlasData.material;
+                
+            var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
+            var rect = textureAtlasData.textureRects[idx];
+            
+            var newMesh = new Mesh();
+            newMesh.name = "newMesh";
+            newMesh.vertices = quadMesh.vertices;
+            newMesh.triangles = quadMesh.triangles;
+            
+            Vector2[] newUV = new Vector2[4];
+            newUV[0] = new Vector2(rect.x, rect.y);
+            newUV[1] = new Vector2(rect.x, rect.y + rect.height);
+            newUV[2] = new Vector2(rect.x + rect.width, rect.y + rect.height);
+            newUV[3] = new Vector2(rect.x + rect.width, rect.y);
+            newMesh.uv = newUV;
+                
+            meshFilter.mesh = newMesh;
+        }
         
         foreach (var textureAtlasData in textureAtlasDatas)
         {
@@ -63,44 +107,7 @@ public class RandomGenerateMeshWithDynamicBatch : TerrainRoot
             
             textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas);
 
-            var spawnDatas = atlasName == "SingleAtlas" ? randomSpawnData.items : randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
-            for (int i = 0; i < spawnDatas.Count; ++i)
-            {
-                var spawnData = spawnDatas[i];
-                
-                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
-                newObject.transform.eulerAngles = spawnData.eulerAngle;
-                var position = transform.position;
-                newObject.transform.localPosition = spawnData.position + position;
-                newObject.transform.SetParent(root, true);
-                newObject.transform.localScale = spawnData.scale;
             
-                MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-                MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-                meshRenderer.enabled = true;
-                meshRenderer.sharedMaterial = textureAtlasData.material;
-                
-                var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
-                var rect = textureAtlasData.textureRects[idx];
-            
-                var newMesh = new Mesh();
-                newMesh.name = "newMesh";
-                newMesh.vertices = quadMesh.vertices;
-                newMesh.triangles = quadMesh.triangles;
-            
-                Vector2[] newUV = new Vector2[4];
-                newUV[0] = new Vector2(rect.x, rect.y);
-                newUV[1] = new Vector2(rect.x, rect.y + rect.height);
-                newUV[2] = new Vector2(rect.x + rect.width, rect.y + rect.height);
-                newUV[3] = new Vector2(rect.x + rect.width, rect.y);
-                newMesh.uv = newUV;
-                
-                // prop.SetFloat("_Float", (float)i);
-            
-                meshFilter.mesh = newMesh;
-                
-                // meshRenderer.SetPropertyBlock(prop);
-            }
         }
     }
 }

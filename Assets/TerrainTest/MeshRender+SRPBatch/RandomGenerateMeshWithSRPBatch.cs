@@ -13,6 +13,8 @@ public class RandomGenerateMeshWithSRPBatch : TerrainRoot
     [SerializeField] private Texture2D shadowMap;
     [SerializeField] private Material srpBatchMaterial;
     
+    private Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
+    
     public void Clear()
     {
         Debug.LogWarning("Clear sprite mesh");
@@ -51,35 +53,40 @@ public class RandomGenerateMeshWithSRPBatch : TerrainRoot
         Shader.SetGlobalTexture("_ColorMask", colorMask);
         Shader.SetGlobalTexture("_ShadowMap", shadowMap);
 
-        foreach (var textureAtlasData in textureAtlasDatas)
+        var spawnDatas = randomSpawnData.items;
+        for (int i = 0; i < spawnDatas.Count; ++i)
         {
-            var atlasName = textureAtlasData.atlasName;
+            var spawnData = spawnDatas[i];
 
-            var spawnDatas = randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
-            for (int i = 0; i < spawnDatas.Count; ++i)
-            {
-                var spawnData = spawnDatas[i];
+            GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+            newObject.transform.eulerAngles = spawnData.eulerAngle;
+            var position = transform.position;
+            newObject.transform.localPosition = spawnData.position + position;
+            newObject.transform.SetParent(root, true);
+            newObject.transform.localScale = spawnData.scale;
 
-                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
-                newObject.transform.eulerAngles = spawnData.eulerAngle;
-                var position = transform.position;
-                newObject.transform.localPosition = spawnData.position + position;
-                newObject.transform.SetParent(root, true);
-                newObject.transform.localScale = spawnData.scale;
-
-                MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-                MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-                meshRenderer.enabled = true;
-                meshRenderer.material = srpBatchMaterial;
+            MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
+            meshRenderer.enabled = true;
                 
-                meshFilter.mesh = quadMesh;
-
+            meshFilter.mesh = quadMesh;
+                
+            if (!materialCache.TryGetValue(spawnData.name, out var newMaterial))
+            {
+                var textureAtlasData = textureAtlasDatas.Find(t => t.atlasName == spawnData.atlas);
+                
+                newMaterial = new Material(srpBatchMaterial.shader); 
+                newMaterial.name = spawnData.name;
+                    
                 var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
                 var rect = textureAtlasData.textureRects[idx];
-                
-                meshRenderer.material.SetTexture("_MainTex", textureAtlasData.atlas);
-                meshRenderer.material.SetVector("_NewUV", new Vector4(rect.x, rect.y, rect.width, rect.height));
+                newMaterial.SetTexture("_MainTex", textureAtlasData.atlas);
+                newMaterial.SetVector("_NewUV", new Vector4(rect.x, rect.y, rect.width, rect.height));
+                    
+                materialCache[spawnData.name] = newMaterial;
             }
+
+            meshRenderer.sharedMaterial = newMaterial;
         }
     }
 }

@@ -65,25 +65,26 @@ public class RandomGenerateSprites : TerrainRoot
         for (int i = 0; i < randomSpawnData.items.Count; ++i)
         {
             var spawnData = randomSpawnData.items[i];
+            var name = "T_Grass_1";
 
-            var sm = spriteAtlasAndMats.FirstOrDefault(sm => sm.spriteAtlas.GetSprite(spawnData.name) != null);
+            var sm = spriteAtlasAndMats.FirstOrDefault(sm => sm.spriteAtlas.GetSprite(name) != null);
             if (sm != null)
             {
-                var sprite = sm.spriteAtlas.GetSprite(spawnData.name);
+                var sprite = sm.spriteAtlas.GetSprite(name);
             
                 if (sprite == null)
                 {
-                    Debug.LogError($"Sprite {spawnData.name} not found in any sprite atlas.");
+                    Debug.LogError($"Sprite {name} not found in any sprite atlas.");
                     continue;
                 }
             
-                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+                GameObject newObject = new GameObject($"GeneratedMeshObject({name})");
                 newObject.transform.eulerAngles = spawnData.eulerAngle;
                 var position = transform.position;
                 position.y += 1.5f;
                 newObject.transform.localPosition = spawnData.position + position;
                 newObject.transform.SetParent(root, true);
-                newObject.transform.localScale = spawnData.scale;
+                // newObject.transform.localScale = spawnData.scale;
             
                 SpriteRenderer spriteRenderer = newObject.AddComponent<SpriteRenderer>();
                 spriteRenderer.sharedMaterial = sm.material;

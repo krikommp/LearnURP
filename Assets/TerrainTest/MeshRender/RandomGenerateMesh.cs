@@ -13,6 +13,8 @@ public class RandomGenerateMesh : TerrainRoot
     [SerializeField] private List<Texture2D> textures;
     [SerializeField] private Material material;
     
+    private Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
+    
     public void Clear()
     {
         Debug.LogWarning("Clear sprite mesh");
@@ -78,10 +80,17 @@ public class RandomGenerateMesh : TerrainRoot
             MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
             MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
             meshRenderer.enabled = true;
-            meshRenderer.material = material;
+
+            if (!materialCache.TryGetValue(spawnData.name, out var newMaterial))
+            {
+                newMaterial = new Material(material.shader); 
+                newMaterial.name = spawnData.name;
+                newMaterial.SetTexture("_MainTex", tex);
+                materialCache[spawnData.name] = newMaterial;
+            }
+
+            meshRenderer.sharedMaterial = newMaterial;
                 
-            meshRenderer.material.SetTexture("_MainTex", tex);
-            
             meshFilter.mesh = quadMesh;
         }
     }

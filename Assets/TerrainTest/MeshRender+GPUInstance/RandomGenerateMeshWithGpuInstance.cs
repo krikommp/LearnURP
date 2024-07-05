@@ -53,37 +53,31 @@ public class RandomGenerateMeshWithGpuInstance : TerrainRoot
 
         props = new MaterialPropertyBlock();
         
-        
-        foreach (var textureAtlasData in textureAtlasDatas)
+        var spawnDatas = randomSpawnData.items;
+        for (int i = 0; i < spawnDatas.Count; ++i)
         {
-            var atlasName = textureAtlasData.atlasName;
-            
-            textureAtlasData.material.SetTexture("_MainTex", textureAtlasData.atlas); 
+            var spawnData = spawnDatas[i];
+                
+            GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
+            newObject.transform.eulerAngles = spawnData.eulerAngle;
+            var position = transform.position;
+            newObject.transform.localPosition = spawnData.position + position;
+            newObject.transform.SetParent(root, true);
+            newObject.transform.localScale = spawnData.scale;
 
-            var spawnDatas = atlasName == "SingleAtlas" ? randomSpawnData.items : randomSpawnData.items.FindAll(x => x.atlas == atlasName).ToList();
-            for (int i = 0; i < spawnDatas.Count; ++i)
-            {
-                var spawnData = spawnDatas[i];
-                
-                GameObject newObject = new GameObject($"GeneratedMeshObject({spawnData.name})");
-                newObject.transform.eulerAngles = spawnData.eulerAngle;
-                var position = transform.position;
-                newObject.transform.localPosition = spawnData.position + position;
-                newObject.transform.SetParent(root, true);
-                newObject.transform.localScale = spawnData.scale;
+            var textureAtlasData = textureAtlasDatas.Find(t => t.atlasName == spawnData.atlas);
             
-                MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
-                MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
-                meshRenderer.enabled = true;
-                meshRenderer.sharedMaterial = textureAtlasData.material;
-                meshFilter.mesh = quadMesh;
+            MeshFilter meshFilter = newObject.AddComponent<MeshFilter>();
+            MeshRenderer meshRenderer = newObject.AddComponent<MeshRenderer>();
+            meshRenderer.enabled = true;
+            meshRenderer.sharedMaterial = textureAtlasData.material;
+            meshFilter.mesh = quadMesh;
                 
-                var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
-                var rect = textureAtlasData.textureRects[idx];
+            var idx = textureAtlasData.textureNames.IndexOf(spawnData.name);
+            var rect = textureAtlasData.textureRects[idx];
                 
-                props.SetVector("_NewUV", new Vector4(rect.x, rect.y, rect.width, rect.height));
-                meshRenderer.SetPropertyBlock(props);
-            }
+            props.SetVector("_NewUV", new Vector4(rect.x, rect.y, rect.width, rect.height));
+            meshRenderer.SetPropertyBlock(props);
         }
     }
 }
