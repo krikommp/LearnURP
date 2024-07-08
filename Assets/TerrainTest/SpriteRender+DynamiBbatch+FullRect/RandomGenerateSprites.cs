@@ -19,7 +19,7 @@ public class RandomGenerateSprites : TerrainRoot
     [SerializeField] private Texture2D shadowMap;
     [SerializeField] private List<SpriteAtlasAndMat> spriteAtlasAndMats;
     
-    private Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
+    private static Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
     
     private void Start()
     {

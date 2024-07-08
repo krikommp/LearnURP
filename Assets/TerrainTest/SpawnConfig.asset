@@ -19,7 +19,7 @@ MonoBehaviour:
     - T_Shrub_1c
     - T_Shrub_2
     - T_Shrub_2b
-    num: 100
+    num: 2000
     scale: 0.3
     renderqueue: 3350
     atlas: PlantAtlas
@@ -30,7 +30,7 @@ MonoBehaviour:
     - T_Tree_02
     - T_Tree_03
     - T_Tree_04
-    num: 80
+    num: 500
     scale: 1.5
     renderqueue: 3350
     atlas: PlantAtlas
@@ -51,14 +51,14 @@ MonoBehaviour:
     - T_Plant_4b
     - T_Plant_4c
     - T_Plant_4d
-    num: 300
+    num: 4000
     scale: 0.5
     renderqueue: 3350
     atlas: PlantAtlas
   grass:
     names:
     - T_Grass_1
-    num: 530
+    num: 3000
     scale: 0.25
     renderqueue: 3350
     atlas: PlantAtlas
@@ -68,7 +68,7 @@ MonoBehaviour:
     - T_mountain_2
     - T_mountain_3
     - T_mountain_4
-    num: 10
+    num: 0
     scale: 1.5
     renderqueue: 3300
     atlas: RockAtlas
@@ -83,7 +83,7 @@ MonoBehaviour:
     - T_Rock_6
     - T_Rock_7
     - T_Rock_9
-    num: 120
+    num: 0
     scale: 1
     renderqueue: 3300
     atlas: RockAtlas
@@ -93,7 +93,7 @@ MonoBehaviour:
     - T_Bridge_ol
     - T_Fortress_1
     - T_Village_3
-    num: 80
+    num: 500
     scale: 0.5
     renderqueue: 3400
     atlas: BuildingAtlas

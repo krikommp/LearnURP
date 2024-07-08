@@ -29,7 +29,7 @@ Shader "Unlit/MeshSRPBatch"
             
             Cull Off
             ZWrite On
-            ColorMask 0
+            // ColorMask 0
 
             HLSLPROGRAM
             #pragma vertex SpriteVert

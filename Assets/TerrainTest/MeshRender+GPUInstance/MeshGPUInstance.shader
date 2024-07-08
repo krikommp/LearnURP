@@ -27,7 +27,7 @@ Shader "Unlit/MeshGPUInstance"
             
             Cull Off
             ZWrite On
-            ColorMask 0
+            // ColorMask 0
             
             
             HLSLPROGRAM

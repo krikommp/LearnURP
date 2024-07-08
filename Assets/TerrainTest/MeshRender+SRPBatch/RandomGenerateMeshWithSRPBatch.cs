@@ -13,7 +13,7 @@ public class RandomGenerateMeshWithSRPBatch : TerrainRoot
     [SerializeField] private Texture2D shadowMap;
     [SerializeField] private Material srpBatchMaterial;
     
-    private Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
+    private static Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
     
     public void Clear()
     {

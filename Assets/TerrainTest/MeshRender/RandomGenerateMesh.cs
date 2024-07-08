@@ -13,7 +13,7 @@ public class RandomGenerateMesh : TerrainRoot
     [SerializeField] private List<Texture2D> textures;
     [SerializeField] private Material material;
     
-    private Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
+    private static Dictionary<string, Material> materialCache = new Dictionary<string, Material>();
     
     public void Clear()
     {
