@@ -61,7 +61,8 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -9146110143161206369}
-  m_RendererFeatureMap: a2388c68ccc5640e9f794770487d1281
+  - {fileID: 8144972459879599394}
+  m_RendererFeatureMap: a2388c68ccc5640e9f794770487d1281228d76604cc10871
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -102,3 +103,21 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &8144972459879599394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a825942247cf15e4082f7f27c1694b74, type: 3}
+  m_Name: AlphaMaskRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_filterSettings:
+    RenderQueueType: 1
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 4294967295

@@ -81,7 +81,7 @@ public class RandomSpawnGenerator : EditorWindow
 
             totalCategories.Add(newName);
             
-            Terrain selectedTerrain = terrainRootScript.terrains[Random.Range(0, terrainRootScript.terrains.Count)];
+            UnityEngine.Terrain selectedTerrain = terrainRootScript.terrains[Random.Range(0, terrainRootScript.terrains.Count)];
             
             Vector3 randomPosition = terrainRootScript.GetRandomPositionOnTerrain(selectedTerrain);
             randomPosition.y = terrainRootScript.GetTerrainHeight(selectedTerrain, randomPosition) + 1.5f;

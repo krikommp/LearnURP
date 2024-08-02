@@ -11,6 +11,14 @@ public class RandomGenerateMeshEditor : Editor
         DrawDefaultInspector();
         
         RandomGenerateMesh myScript = (RandomGenerateMesh)target;
+        // if (!myScript.gameObject.GetComponent<T>())
+        // {
+        //     if(GUILayout.Button("Add TerrainRoot"))
+        //     {
+        //         myScript.gameObject.AddComponent<T>();
+        //     }
+        // }
+
         if(GUILayout.Button("Generate"))
         {
             myScript.Generate();

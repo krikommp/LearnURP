@@ -55,6 +55,7 @@ Shader "Universal Render Pipeline/Terrain/Lit"
             Name "ForwardLit"
             Tags { "LightMode" = "UniversalForward" }
             HLSLPROGRAM
+            #pragma enable_d3d11_debug_symbols
             #pragma target 3.0
 
             #pragma vertex SplatmapVert

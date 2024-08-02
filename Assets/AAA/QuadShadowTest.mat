@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: QuadShadowTest
+  m_Shader: {fileID: 4800000, guid: 28d1d8055a9ed154f85373861f77dc87, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _CLOUD_SHADOW_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CloudTex:
+        m_Texture: {fileID: 2800000, guid: 2bc52695ba3af7e49b0cb81d1342c0c8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: -112.79}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: ed04e05aff8232b47b724b80ec777202, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CLOUD_SHADOW: 1
+    - _Coverage: 0.46
+    - _Opacity: 0.3
+    - _Scale: 0.24
+    - _Softness: 0.24
+    - _SpeedX: 0.05
+    - _SpeedY: 0
+    m_Colors:
+    - _CloudColor: {r: 1, g: 0, b: 0, a: 1}
+    - _CloudShadowParams: {r: 0.34, g: 0.13, b: 0.23, a: 0.14}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
