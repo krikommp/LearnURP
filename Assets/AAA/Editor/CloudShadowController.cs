@@ -25,14 +25,14 @@ public class CloudShadowController : EditorWindow
     {
         m_CloudShadowMaterials.Clear();
 
-        var terrains = Terrain.activeTerrains;
-        foreach (var terrain in terrains)
-        {
-            if (terrain.materialTemplate.shader.keywordSpace.FindKeyword("_CLOUD_SHADOW_ON").isValid)
-            {
-                m_CloudShadowMaterials.Add(terrain.materialTemplate);
-            }
-        }
+        // var terrains = Terrain.activeTerrains;
+        // foreach (var terrain in terrains)
+        // {
+        //     if (terrain.materialTemplate.shader.keywordSpace.FindKeyword("_CLOUD_SHADOW_ON").isValid)
+        //     {
+        //         m_CloudShadowMaterials.Add(terrain.materialTemplate);
+        //     }
+        // }
             
         var renders = FindObjectsOfType<Renderer>();    
         

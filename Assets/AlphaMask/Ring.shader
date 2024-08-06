@@ -3,6 +3,7 @@ Shader "Unlit/Common/Ring"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (1,1,1,1)
     }
 
     SubShader
@@ -48,6 +49,7 @@ Shader "Unlit/Common/Ring"
             float4 _MainTex_ST;
             sampler2D _AlphaMask;
             float4 _AlphaMask_ST;
+            float4 _Color;
 
             Varyings vert(Attributes IN)
             {
@@ -63,7 +65,7 @@ Shader "Unlit/Common/Ring"
             half4 frag(Varyings IN) : SV_Target
             {
                 half4 col = tex2D(_MainTex, IN.uv);
-                half4 finalColor = col;
+                half4 finalColor = col * _Color;
 
                 float2 uv = IN.positionHCS.xy / _ScaledScreenParams.xy;
                 half4 alphaMask = tex2D(_AlphaMask, uv);
