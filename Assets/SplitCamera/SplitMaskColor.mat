@@ -42,6 +42,6 @@ Material:
     m_Colors:
     - _BlurredRange: {r: 0, g: 1, b: 0.1, a: 0.1}
     - _MaskValue0: {r: -1, g: 1, b: 1, a: 1}
-    - _MaskValue1: {r: 0, g: -3.9, b: 0.1, a: 0.04}
+    - _MaskValue1: {r: 7.99, g: -3.9, b: 0.1, a: 0.04}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

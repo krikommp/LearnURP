@@ -134,11 +134,13 @@ Shader "Unlit/SplitColor"
                 {
                     step = 0.0;
                 }
+
+                step += _MaskValue1.x;
                 
                 float mask = maskTexValue1 * step;
                 // mask = clamp(mask, 0, 1);
                 // mask *= 0.5f;
-                finalColor.xyz = mask;
+                // finalColor.xyz = mask;
 
                 float2 mask2UV = (i.maskPositions.zw * _MaskTex2_ST.xy) + _MaskTex2_ST.zw;
                 mask2UV.xy = 1.0 - mask2UV.xy;
