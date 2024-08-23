@@ -20,7 +20,7 @@ Shader "Unlit/Common/Sprite"
             Cull Off
             ZWrite Off
             ZTest Off
-            Blend SrcAlpha OneMinusSrcAlpha
+            Blend SrcAlpha OneMinusSrcAlpha, One One
 
             Tags
             {

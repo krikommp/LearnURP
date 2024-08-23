@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.sr4dev.unity-spriteassist": {
+      "version": "https://github.com/sr4dev/Unity-SpriteAssist.git?path=Assets/SpriteAssist",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "12817e6f27b8f91e5b74e5268ae6f0cc8682530e"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,

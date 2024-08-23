@@ -118,7 +118,7 @@ public class AlphaMaskRenderFeature : ScriptableRendererFeature
         FilterSettings filter = m_filterSettings;
         
         m_ScriptablePass = new AlphaMaskRenderPass(filter.RenderQueueType, filter.LayerMask);
-        m_ScriptablePass.renderPassEvent = RenderPassEvent.BeforeRenderingOpaques;
+        m_ScriptablePass.renderPassEvent = RenderPassEvent.BeforeRenderingTransparents;
     }
 
     public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)

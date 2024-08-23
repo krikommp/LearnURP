@@ -19,7 +19,7 @@ Shader "Unlit/Common/Ring"
         {
             ZWrite Off
             ZTest On
-            Blend SrcAlpha OneMinusSrcAlpha
+            Blend SrcAlpha OneMinusSrcAlpha, One One
 
             Tags
             {
@@ -66,6 +66,7 @@ Shader "Unlit/Common/Ring"
             {
                 half4 col = tex2D(_MainTex, IN.uv);
                 half4 finalColor = col * _Color;
+                finalColor.a = _Color.a;
 
                 float2 uv = IN.positionHCS.xy / _ScaledScreenParams.xy;
                 half4 alphaMask = tex2D(_AlphaMask, uv);
@@ -75,13 +76,14 @@ Shader "Unlit/Common/Ring"
                 // float depth = (IN.positionHCS.z / IN.positionHCS.w) * 0.5 + 0.5;
                 
                 half maskDepth = alphaMask.g;
-
+                
                 if (depth <= maskDepth)
                 {
                     // finalColor = half4(1, 0, 0, 1);
                 }else
                 {
-                    finalColor.a = finalColor.a + finalColor.a * (-alphaMask.r);
+                    // finalColor = half4(1, 0, 0, 1);
+                    finalColor.a = finalColor.a + finalColor.a * ( - alphaMask.r);
                 }
 
                 return finalColor;
