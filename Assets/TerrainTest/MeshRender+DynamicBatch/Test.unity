@@ -2104,7 +2104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469194274}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3417649, y: 0.02040118, z: -0.0076751956, w: -0.9395327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -227, y: 143, z: -125}
   m_LocalScale: {x: 27.022223, y: 15.200001, z: 0.10000001}
   m_ConstrainProportionsScale: 0
@@ -2728,7 +2728,7 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 200, y: 200}
-  m_LightCookieOffset: {x: 36762.176, y: 0}
+  m_LightCookieOffset: {x: 46276.5, y: 0}
   m_SoftShadowQuality: 0
 --- !u!108 &1765103376
 Light:

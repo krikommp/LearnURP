@@ -41,7 +41,7 @@ Material:
     - _Scale: -7.12
     m_Colors:
     - _MaskValue0: {r: -28, g: 2, b: 1, a: 4}
-    - _MaskValue1: {r: 4.96, g: -3.9, b: 0.1, a: 0.04}
+    - _MaskValue1: {r: 6.33, g: -3.9, b: 0.1, a: 0.04}
     - _MaskValue2: {r: 1, g: 1, b: 1, a: 0.00392}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
