@@ -162,7 +162,7 @@ Shader "Unlit/SplitColor2"
                 float2 maskRange = CalculateMaskRange(i.uvMinMax, _MaskCoverage, _Mask1Strength, _Mask2Strength);
                 mask = mask - lerp(maskRange.x, maskRange.y, _MaskAttenuation);
                 mask = clamp(mask, 0.0, 1.0);
-                finalColor.xyz = mask; //SplitScreen(i.uv, i.uvMinMax);
+                finalColor.xyz = mask + SplitScreen(i.uv, i.uvMinMax);
 
                 return finalColor;
             }

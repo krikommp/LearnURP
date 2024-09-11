@@ -39,13 +39,13 @@ Material:
     m_Floats:
     - _Mask1Strength: 2
     - _Mask2Strength: 4
-    - _MaskAttenuation: 0.398
+    - _MaskAttenuation: 0
     - _MaskCoverage: -13.12
     - _MaskScale: 7.12
     - _Rotate: 345
     - _Scale: 7.12
     - _SplitRotate: 34.94
-    - _SplitScreenRatio: 0
+    - _SplitScreenRatio: 0.357
     m_Colors:
     - _MaskValue0: {r: -4, g: 2, b: 1, a: 1}
     - _MaskValue1: {r: -0.57, g: -3.9, b: 0.1, a: 0.04}

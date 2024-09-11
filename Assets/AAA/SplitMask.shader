@@ -20,14 +20,15 @@ Shader "Unlit/SplitMask"
             "RenderType"="Opaque-1"
         }
 
-        Stencil
-        {
-            Ref [_StencilRef]
-            Comp Always
-            Pass Replace
-        }
+        //        Stencil
+        //        {
+        //            Ref [_StencilRef]
+        //            Comp Always
+        //            Pass Replace
+        //        }
         ColorMask 0
-        ZWrite Off
+        ZWrite On
+        ZTest Off
 
         Pass
         {
@@ -144,7 +145,7 @@ Shader "Unlit/SplitMask"
                 // mask = ((-maskTexValue2) * _MaskValue0.w) + mask;
                 // finalColor.xyz = (mask);
 
-                mask2 += (-_MaskValue1.x);  
+                mask2 += (-_MaskValue1.x);
                 // mask2 = (1 / _MaskValue0.z) * mask2;
                 mask2 = clamp(mask2, 0.0, 1.0);
 
@@ -153,19 +154,19 @@ Shader "Unlit/SplitMask"
                 // float finalMask = (mask3 * mask2) + mainTex.r;
 
                 float finalMask = mask2 + mainTex.r;
-                
+
                 // finalColor.xyz = _StencilRef * 0.5;
                 // finalColor.xyz = mainTex.r;
                 if (_StencilRef == 1)
                 {
-                    if (finalMask > 0.01)
+                    if (finalMask < 0.01)
                     {
                         clip(-1);
                     }
                 }
                 else
                 {
-                    if (finalMask < 0.01)
+                    if (finalMask > 0.01)
                     {
                         clip(-1);
                     }

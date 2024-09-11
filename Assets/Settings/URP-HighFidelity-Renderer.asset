@@ -1,63 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9146110143161206369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: PreDepth
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    passTag: PreDepth
-    Event: 450
-    filterSettings:
-      RenderQueueType: 1
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 4294967295
-      PassNames:
-      - PreDepth
-    overrideMaterial: {fileID: 0}
-    overrideMaterialPassIndex: 0
-    overrideShader: {fileID: 0}
-    overrideShaderPassIndex: 0
-    overrideMode: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &-3869015244243953992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd52b44a71f2c914e9b94a3c30509183, type: 3}
-  m_Name: SplitCameraRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  renderPassEvent: 0
-  m_stencilRef: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,13 +16,8 @@ MonoBehaviour:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7,
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
-  m_RendererFeatures:
-  - {fileID: -9146110143161206369}
-  - {fileID: 8144972459879599394}
-  - {fileID: 8424140992093605397}
-  - {fileID: 5590771148269860420}
-  - {fileID: -3869015244243953992}
-  m_RendererFeatureMap: a2388c68ccc5640e9f794770487d128110cd7da048d4fe5515ce8b6b998fe874504d37d1e8ed4997b8964460227f4eca
+  m_RendererFeatures: []
+  m_RendererFeatureMap: b8964460227f4eca
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -121,54 +58,3 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
---- !u!114 &5590771148269860420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0270f899f33c69a47bd1cfc0fe59ed59, type: 3}
-  m_Name: PostRTRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  postSetting:
-    renderPassEvent: 500
-    grabbedTextureName: _GrabbedTexture
---- !u!114 &8144972459879599394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a825942247cf15e4082f7f27c1694b74, type: 3}
-  m_Name: AlphaMaskRenderFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  m_filterSettings:
-    RenderQueueType: 1
-    LayerMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
---- !u!114 &8424140992093605397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8386ec7a0796cd14bb23ce272baff55d, type: 3}
-  m_Name: ColorBlitRendererFeature
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  m_Shader: {fileID: 4800000, guid: a0f61601d07fef645bb6c263194a5176, type: 3}
-  m_Intensity: 1.5
-  m_split1Texture: {fileID: 8400000, guid: fb769edf59c7d8d4e83a55d56448979d, type: 2}
-  m_split2Texture: {fileID: 8400000, guid: c8224968521e98043aa91156ae4502bd, type: 2}
